@@ -108,5 +108,8 @@ function draw() {
   vertex(w-(sr*cos(3*PI/10)), h-(sr*sin(3*PI/10)));
   endShape(CLOSE);
 
-  
+  //Name
+  strokeWeight(0);
+  fill('black');
+  text('Cleveland Martin IV - 897521411', 0, 10);
 }
