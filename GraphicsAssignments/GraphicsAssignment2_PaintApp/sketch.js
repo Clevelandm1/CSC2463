@@ -1,15 +1,29 @@
+let brush = 'black';
+let angle = 0;
+let p1 = createVector(14, 252);
+var slider;
+
+
 function setup() {
   createCanvas(1000, 600);
   background(240);
+  angleMode(DEGREES);
+  frameRate(120);
+
+  slider = createSlider(1, 60, 20);
+  slider.size(200)
+  slider.position(-87,390);
+  slider.style('transform', 'rotate(270deg)')
 }
 
-let brush = 'black';
+
+
 
 function draw() {
-  strokeWeight(1);
+  let brushs = slider.value();
+  smooth();
   cursor(CROSS);
-  fill('black');
-  strokeWeight(4)
+  strokeWeight(brushs);
 
   if(mouseIsPressed){
     stroke(brush);
@@ -18,35 +32,53 @@ function draw() {
 
 strokeWeight(0);
 
+  fill(100);
+  rect(0, 0, 45, 600);
+
   fill('red');
-  let red = square(2, 4, 24);
+  square(2, 4, 24);
 
   fill('orange');
-  let orange = square(2, 30, 24);
+  square(2, 30, 24);
 
   fill('yellow');
-  let yellow = square(2, 56, 24);
+  square(2, 56, 24);
 
   fill('lime');
-  let lime = square(2, 82, 24);
+  square(2, 82, 24);
 
   fill('cyan');
-  let cyan = square(2, 108, 24);
+  square(2, 108, 24);
 
   fill('blue');
-  let blue = square(2, 134, 24);
+  square(2, 134, 24);
 
   fill('magenta');
-  let magenta = square(2, 160, 24);
+  square(2, 160, 24);
 
   fill('brown');
-  let brown = square(2, 186, 24);
+  square(2, 186, 24);
 
   fill('white');
-  let white = square(2, 212, 24);
+  square(2, 212, 24);
 
   fill('black');
-  let black = square(2, 238, 24);
+  square(2, 238, 24);
+
+  strokeWeight(1);
+  stroke(0);
+  fill('white');
+  square(2, 264, 24);
+  
+  push();
+  fill('pink');
+  //rectMode(CENTER);
+  translate(14, 276)
+  rotate(angle);
+  quad((50/4-20)*.9, (50/4-15)*.9, (120/4-20)*.9, (40/4-15)*.9, (110/4-20)*.9, (80/4-15)*.9, (40/4-20)*.9, (90/4-15)*.9);
+  angle = angle + 2;
+  //quad(50/4 -7, 50/4+260, 120/4 -5, 40/4+260, 110/4 -5, 80/4+260, 40/4 -7, 90/4+260);
+  pop();
 
   noFill();
 }
@@ -90,5 +122,9 @@ function mouseClicked(){
 
   if((mouseX>=2 && mouseX<=26) && (mouseY>=238 && mouseY<=262)){
     brush = 'black';
+  }
+
+  if((mouseX>=2 && mouseX<=26) && (mouseY>=264 && mouseY<=288)){
+    brush = 240;
   }
 }
