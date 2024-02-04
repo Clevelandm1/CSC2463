@@ -1,36 +1,39 @@
 let img;
+let wood;
 let Roach = [];
 let bugs = [];
+let count = 0;
 
 function preload(){
    img = loadImage('libraries/Roach.png');
+   wood = loadImage('libraries/Untitled_Artwork.png');
 }
 
 function setup() {
    createCanvas(windowWidth, windowHeight);
    rectMode(CENTER);
    imageMode(CENTER);
-   frameRate(35);
+   frameRate(30);
    let x = 0;
    for(let i = 0; i < 10; i++){
       Roach[i] = img.get(x, 0, 96, 100);
       x += 100;
    }
 
-   for(let i = 0; i < 10; i++){
-      bugs[i] = new bug(random(100, 600), random(100, 600));
+   for(let i = 0; i < 40; i++){
+      bugs[i] = new bug(random(100, width-100), random(100, height-100));
+      //bugs[i] = new bug(random(110, 110), random(110, 110));
    }
 }
 
 function draw() {
-   background(100);
-   
+   image(wood, 0, 0);
 
    for(let i = bugs.length - 1; i >= 0; i--){
       bugs[i].update();
       bugs[i].show();
       if(bugs[i].frame > 9){
-         bugs.splice(i, 1, new bug(random(100, 600), random(100, 600)));
+         bugs.splice(i, 1, new bug(random(100, width-100), random(100, height-100)));
       }
    }
    
