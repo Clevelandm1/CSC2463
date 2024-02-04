@@ -9,7 +9,7 @@ function preload(){
    wood = loadImage('libraries/Untitled_Artwork.png');
 }
 
-function setup() {
+function setup(){
    createCanvas(windowWidth, windowHeight);
    rectMode(CENTER);
    imageMode(CENTER);
@@ -26,7 +26,8 @@ function setup() {
    }
 }
 
-function draw() {
+function draw(){
+   wood.resize(width*2, 0);
    image(wood, 0, 0);
 
    for(let i = bugs.length - 1; i >= 0; i--){
