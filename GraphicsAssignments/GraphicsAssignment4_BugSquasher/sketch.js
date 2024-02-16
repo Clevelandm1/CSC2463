@@ -2,17 +2,26 @@ let img;
 let wood;
 let Roach = [];
 let bugs = [];
-let count = 0;
+let count = 10;
+let font;
+let textS = 0;
+let mode = 0;
+let countDown = 30;
+let score = 0;
+let level = 10;
+
 
 function preload(){
    img = loadImage('libraries/Roach.png');
    wood = loadImage('libraries/Untitled_Artwork.png');
+   font = loadFont('libraries/PressStart2P-Regular.ttf');
 }
 
 function setup(){
    createCanvas(windowWidth, windowHeight);
    rectMode(CENTER);
    imageMode(CENTER);
+   textFont(font);
    frameRate(30);
    let x = 0;
    for(let i = 0; i < 10; i++){
@@ -20,7 +29,7 @@ function setup(){
       x += 100;
    }
 
-   for(let i = 0; i < 40; i++){
+   for(let i = 0; i < count; i++){
       bugs[i] = new bug(random(100, width-100), random(100, height-100));
       //bugs[i] = new bug(random(110, 110), random(110, 110));
    }
@@ -30,14 +39,17 @@ function draw(){
    wood.resize(width*2, 0);
    image(wood, 0, 0);
 
-   for(let i = bugs.length - 1; i >= 0; i--){
-      bugs[i].update();
-      bugs[i].show();
-      if(bugs[i].frame > 9){
-         bugs.splice(i, 1, new bug(random(100, width-100), random(100, height-100)));
-      }
+   if(mode == 0){
+      startMenu();
    }
-   
+
+   else if(mode == 1){
+      play();
+   }
+
+   else if(mode == 2){
+      endScreen();
+   }
 
 }
 
@@ -62,7 +74,7 @@ class bug{
       this.acc.add(p5.Vector.random2D());
       this.acc.setMag(10);
       this.vel.add(this.acc);
-      this.vel.limit(10);
+      this.vel.limit(level);
       if(this.alive == false){
          this.vel.mult(0);
       }
@@ -118,12 +130,95 @@ class bug{
    bugClicked(){
       if(((mouseX >= this.pos.x - 50)&&(mouseX <= this.pos.x + 50)) && ((mouseY >= this.pos.y - 32)&&(mouseY <= this.pos.y + 32))){
          this.alive = false;
+         score++;
+         level+=1;
       }
    }
 }
 
 function mouseClicked(){
-   for(let j = 0; j < bugs.length; j++){
-      bugs[j].bugClicked();
+   if(mode == 0){
+      if((mouseX > width/2 - (700+sin(textS)*120)/2) && (mouseX < width/2 + (700+sin(textS)*120)/2) && (mouseY > height/2 - (100+sin(textS)*10)/2) && (mouseY < height/2 + (100+sin(textS)*10)/2)){
+         mode++;
+      }
    }
+
+   if(mode == 1){
+      for(let j = 0; j < bugs.length; j++){
+         bugs[j].bugClicked();
+      }
+   }
+
+   if(mode == 2){
+      if((mouseX > width/2 - (700+sin(textS)*120)/2) && (mouseX < width/2 + (700+sin(textS)*120)/2) && (mouseY > height/2 - (100+sin(textS)*10)/2) && (mouseY < height/2 + (100+sin(textS)*10)/2)){
+         score = 0;
+         countDown = 30;
+         level = 10;
+         mode = 0;
+      }
+   }
+}
+
+function play(){
+   for(let i = bugs.length - 1; i >= 0; i--){
+      bugs[i].update();
+      bugs[i].show();
+      if(bugs[i].frame > 9){
+         bugs.splice(i, 1, new bug(random(100, width-100), random(100, height-100)));
+      }
+   }
+
+   push();
+   textSize(40);
+   noStroke();
+   fill('black');
+   text('Time Left: ' + str(countDown), width/2, 100);
+   if(frameCount%30 == 0){
+      countDown--;
+   }
+   pop();
+
+   push();
+   noStroke();
+   fill('black');
+   textSize(50);
+   text(score, width/2, height/2);
+   pop();
+
+   if(countDown < 0){
+      mode = 2;
+   }
+}
+
+function startMenu(){
+   
+push();
+rectMode(CENTER);
+strokeWeight(10);
+stroke(0);
+fill('white');
+rect(width/2, height/2, 700+sin(textS)*120, 100+sin(textS)*10);
+pop();
+
+   textAlign(CENTER, CENTER);
+   fill('black');
+   textSize(40+sin(textS)*10);
+   text('Click to Start!', width/2, height/2);
+   textS+=.05;
+
+   
+}
+
+function endScreen(){
+   push();
+   textSize(75);
+   stroke('brown');
+   fill('black');
+   text('GAME OVER!', width/2, 100);
+   text('Score: '+score, width/2, 225);
+
+   textSize(40+sin(textS)*10);
+   text('Click to Restart!', width/2, height/2);
+   textS+=.05;
+   pop();
 }

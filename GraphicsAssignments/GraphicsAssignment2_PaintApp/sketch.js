@@ -29,6 +29,9 @@ function draw() {
     stroke(brush);
     line(mouseX, mouseY, pmouseX, pmouseY);
   }
+  textSize(200);
+  textAlign(CENTER, CENTER)
+  text('hi', width/2, height/2);
 
 strokeWeight(0);
 
