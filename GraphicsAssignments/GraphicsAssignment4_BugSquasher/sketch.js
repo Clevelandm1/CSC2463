@@ -55,7 +55,6 @@ function draw(){
 
 class bug{
    constructor(x, y){
-
       //Movement
       this.pos = createVector(x, y);      
       this.vel = createVector(0, 0);
