@@ -23,6 +23,7 @@ function setup(){
    imageMode(CENTER);
    textFont(font);
    frameRate(30);
+   pixelDensity(1);
    let x = 0;
    for(let i = 0; i < 10; i++){
       Roach[i] = img.get(x, 0, 96, 100);
