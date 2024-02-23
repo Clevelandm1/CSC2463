@@ -10,7 +10,7 @@ let x = 0;
 function setup() {
   createCanvas(windowWidth, windowHeight);
 }
-
+//TODO: testing this extension and it works
 function draw() {
   background(0);
   //noiseLine();
@@ -32,7 +32,7 @@ function noiseFlatMap(){
   endShape();
   inc+=incc;
 }
-
+ 
 function noiseLine(){
   strokeWeight(10);
   let xoff = inc;
@@ -47,8 +47,8 @@ function noiseLine(){
   stroke(colors[x]);
 
   noFill();
-beginShape();
-for(let i = 0; i < 25; i++){
+  beginShape();
+  for(let i = 0; i < 25; i++){
   // if(x == 6){
   //   x = 0;
   // }
