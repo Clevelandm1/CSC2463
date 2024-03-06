@@ -31,8 +31,8 @@ function setup() {
 }
 
 function draw() {
-  background(100, 220, 150);
-  text("Play A through K and change reverb delay with slider.", 75, 150);
+  background(100);
+  text("Play A through K and change reverb delay with slider.", 45, 150);
   print(bend.decay);
 }
 
