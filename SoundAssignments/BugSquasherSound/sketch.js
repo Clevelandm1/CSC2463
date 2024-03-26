@@ -5,7 +5,7 @@ let bugs = [];
 let count = 10;
 let font;
 let textS = 0;
-let mode = 0;
+let mode = -2;
 let countDown = 30;
 let score = 0;
 let level = 10;
@@ -22,6 +22,9 @@ miss.toDestination();
 let splat;
 splat = new Tone.Player("assets/sounds/splat.mp3");
 splat.toDestination();
+let melodyLoop;
+melodyLoop = new Tone.Player("assets/sounds/melodyLoop.mp3");
+melodyLoop.toDestination();
 
 
 function preload(){
@@ -53,7 +56,11 @@ function draw(){
    wood.resize(width*2, 0);
    image(wood, 0, 0);
 
-   if(mode == 0){
+   if(mode == -2){
+      startProgram();
+   }
+
+   if(mode == 0 || mode == -1){
       startMenu();
    }
 
@@ -155,10 +162,18 @@ class bug{
 }
 
 function mouseClicked(){
-   if(mode == 0){
+   if(mode == -2){
+      mode++;
+      melodyLoop.start();
+   }
+
+   if(mode == 0 || mode == -1){
       if((mouseX > width/2 - (700+sin(textS)*120)/2) && (mouseX < width/2 + (700+sin(textS)*120)/2) && (mouseY > height/2 - (100+sin(textS)*10)/2) && (mouseY < height/2 + (100+sin(textS)*10)/2)){
          mode++;
+      if(mode == 1){
+         melodyLoop.stop();
          song.start();
+      }
       }
    }
 
@@ -175,10 +190,18 @@ function mouseClicked(){
          level = 10;
          mode = 0;
          endSong.stop();
+         melodyLoop.start();
       }
    }
 }
 
+
+function startProgram(){
+   push();
+   textSize(26)
+   text('Click the Mouse to Begin...', width/2-330, height/2);
+   pop();
+}
 function play(){
    for(let i = bugs.length - 1; i >= 0; i--){
       bugs[i].update();
