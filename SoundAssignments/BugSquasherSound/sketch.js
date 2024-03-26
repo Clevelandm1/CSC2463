@@ -13,9 +13,11 @@ let level = 10;
 let song;
 song = new Tone.Player("assets/sounds/MYCREATEDSONG.mp3");
 song.toDestination();
+song.loop = true;
 let endSong;
 endSong = new Tone.Player("assets/sounds/yellowTree.mp3");
 endSong.toDestination();
+endSong.loop = true;
 let miss;
 miss = new Tone.Player("assets/sounds/miss.mp3");
 miss.toDestination();
@@ -25,6 +27,7 @@ splat.toDestination();
 let melodyLoop;
 melodyLoop = new Tone.Player("assets/sounds/melodyLoop.mp3");
 melodyLoop.toDestination();
+melodyLoop.loop = true;
 
 
 function preload(){
@@ -229,7 +232,7 @@ function play(){
    pop();
 
    if(countDown < 0){
-      //song.stop();
+      song.stop();
       mode = 2;
       endSong.start();
    }
