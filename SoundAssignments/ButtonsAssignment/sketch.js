@@ -79,7 +79,7 @@ function setup() {
   let melodyLoop_button = createButton('Melody Loop');
   melodyLoop_button.position(width/2, height/2);
   melodyLoop_button.mouseClicked(() =>{
-    melodyLoop.start();
+    melodyLoop.start() ;
     gameMusic.stop();
     windBlown.stop();
     yellowTree.stop();
