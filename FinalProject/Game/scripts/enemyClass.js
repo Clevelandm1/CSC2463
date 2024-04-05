@@ -7,6 +7,7 @@ class enemy{
     this.player = player;
     this.map = map;
     this.facing = createVector(0, 0);
+    this.playerCollisionHelper = 6;
   }
 
   follow(){
@@ -18,7 +19,7 @@ class enemy{
 
   update(){
     this.follow();
-    this.pos.add(this.vel);
+    
 
     if(this.player.onWall.x == 0){
         this.pos.x+=this.map.vel.x;
@@ -32,6 +33,17 @@ class enemy{
       this.map.vel.set();
     }
     this.map.isMoving = false;
+
+    this.collision();
+  }
+
+  collision(){
+    console.log(this.pos.x, this.player.pos.x);
+    if(this.pos.x + this.player.size/2 - this.playerCollisionHelper > this.player.pos.x - this.player.size/2 + this.playerCollisionHelper && this.pos.x - this.player.size/2 + this.playerCollisionHelper < this.player.pos.x + this.player.size/2 - this.playerCollisionHelper && this.pos.y + this.player.size/2 - this.playerCollisionHelper > this.player.pos.y - this.player.size/2 + this.playerCollisionHelper && this.pos.y - this.player.size/2 + this.playerCollisionHelper < this.player.pos.y + this.player.size/2 - this.playerCollisionHelper){
+        console.log("OK");
+        this.vel.mult(-1);
+    }
+    this.pos.add(this.vel);
   }
 
   face(){

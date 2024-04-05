@@ -3,7 +3,7 @@ class map{
     this.pos = createVector(0, 0);
     this.vel = createVector(0, 0);
     this.acc = createVector(0, 0);
-    this.speed = 15;
+    this.speed = 10;
     this.playerFacing = createVector(0, 0);
     this.mapSize = 2000;
   }

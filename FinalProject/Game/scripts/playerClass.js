@@ -4,7 +4,8 @@ class player{
     this.spawnPointX = [this.pos.x - 600, this.pos.x + 600];
     this.spawnPointY = [this.pos.y - 600, this.pos.y + 600];
     this.facing = createVector(0, 0);
-    this.onWall = createVector(0, 0);;
+    this.onWall = createVector(0, 0);
+    this.size = 50;
   }
 
   mouseKB(){
@@ -22,7 +23,7 @@ class player{
     fill(0, 0, 170);
     translate(this.pos.x, this.pos.y);
     rotate(this.facing.heading());
-    square(0, 0, 50);
+    square(0, 0, this.size);
     pop();
   }
 }
