@@ -29,18 +29,18 @@ class enemy{
         this.pos.y+=this.map.vel.y;
     }
 
-    if(this.map.isMoving == false){
-      this.map.vel.set();
-    }
-    this.map.isMoving = false;
+    // if(this.map.isMoving == false){
+    //   this.map.vel.set();
+    // }
+    // this.map.isMoving = false;
 
     this.collision();
   }
+  enemyCollision(){
 
+  }
   collision(){
-    console.log(this.pos.x, this.player.pos.x);
     if(this.pos.x + this.player.size/2 - this.playerCollisionHelper > this.player.pos.x - this.player.size/2 + this.playerCollisionHelper && this.pos.x - this.player.size/2 + this.playerCollisionHelper < this.player.pos.x + this.player.size/2 - this.playerCollisionHelper && this.pos.y + this.player.size/2 - this.playerCollisionHelper > this.player.pos.y - this.player.size/2 + this.playerCollisionHelper && this.pos.y - this.player.size/2 + this.playerCollisionHelper < this.player.pos.y + this.player.size/2 - this.playerCollisionHelper){
-        console.log("OK");
         this.vel.mult(-1);
     }
     this.pos.add(this.vel);

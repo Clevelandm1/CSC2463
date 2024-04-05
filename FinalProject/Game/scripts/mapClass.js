@@ -13,6 +13,13 @@ class map{
       return true;
     }
   }
+
+  moveCheck(){
+    if(this.isMoving == false){
+      this.vel.set();
+    }
+    this.isMoving = false;
+  }
   moveLeft(){
     this.move = true;
     this.acc.add(-1);

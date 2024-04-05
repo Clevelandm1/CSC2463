@@ -6,6 +6,7 @@ function setup(){
   canvas = createCanvas(gameWidth, gameHeight);
   canvas.position(100, 100);
   p = new world(0, 0);
+  p.fillEnemies();
 }
 
 function draw() {
@@ -20,14 +21,27 @@ class world{
   constructor(){
     this.map = new map(width/2, height/2);
     this.player = new player(gameWidth/2, gameHeight/2, this.map);
+    this.enemies = []
     this.enemy = new enemy(random(this.player.spawnPointX), random(this.player.spawnPointY), this.player, this.map);
+    this.enemyCount = 500;
+
+  }
+
+  fillEnemies(){
+    for(let i = 0; i < this.enemyCount; i++){
+      this.enemies.push(new enemy(random(this.player.spawnPointX), random(this.player.spawnPointY), this.player, this.map));
+    }
   }
 
   run(){
     this.map.show();
     this.enemy.show();
     this.player.show();
+    for(let i = 0; i < this.enemyCount; i++){
+      this.enemies[i].show();
+    }
     this.wallCollision();
+    this.map.moveCheck();
   }
 
   wallCollision(){
