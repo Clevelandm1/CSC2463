@@ -3,7 +3,9 @@ class map{
     this.pos = createVector(0, 0);
     this.vel = createVector(0, 0);
     this.acc = createVector(0, 0);
-    this.speed = 10;
+    this.speed = 15;
+    this.playerFacing = createVector(0, 0);
+    this.mapSize = 2000;
   }
 
   isMoving(){
@@ -55,6 +57,7 @@ class map{
   update(){
     this.controller();
     this.vel = this.acc;
+    this.playerFacing = this.acc;
     this.vel.setMag(this.speed)
     this.pos.add(this.vel);
   }
@@ -62,7 +65,7 @@ class map{
 
   show(){
     fill('gray');
-    square(this.pos.x, this.pos.y, 1000);
+    square(this.pos.x, this.pos.y, this.mapSize);
     this.update();
   }
 }
