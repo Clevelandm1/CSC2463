@@ -3,11 +3,12 @@ class enemy{
     this.pos = createVector(x, y);
     this.vel = createVector(0, 0);
     this.acc = createVector(0, 0);
-    this.speed = 7;
+    this.speed = 5;
     this.player = player;
     this.map = map;
     this.facing = createVector(0, 0);
     this.playerCollisionHelper = 6;
+    this.size = 40;
   }
 
   follow(){
@@ -29,14 +30,16 @@ class enemy{
         this.pos.y+=this.map.vel.y;
     }
 
-    // if(this.map.isMoving == false){
-    //   this.map.vel.set();
-    // }
-    // this.map.isMoving = false;
 
     this.collision();
   }
-  enemyCollision(){
+  enemyCollision(enemy){
+    if(this.pos.x + this.size/2 > enemy.pos.x - this.size/2 && this.pos.x - this.size/2 < enemy.pos.x + this.size/2 && this.pos.y + this.size/2 > enemy.pos.y - this.size/2 && this.pos.y - this.size/2 < enemy.pos.y + this.size/2){
+      let distance = p5.Vector.sub(enemy.pos, this.pos);
+      distance.setMag(3);
+      this.pos.sub(distance);
+      
+    }
 
   }
   collision(){
@@ -63,7 +66,7 @@ class enemy{
     fill(170, 0, 0);
     push()
     this.rotation()
-    square(0, 0, 40);
+    square(0, 0, this.size);
     pop();
     this.update();
 

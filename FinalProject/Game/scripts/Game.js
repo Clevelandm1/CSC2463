@@ -23,7 +23,7 @@ class world{
     this.player = new player(gameWidth/2, gameHeight/2, this.map);
     this.enemies = []
     this.enemy = new enemy(random(this.player.spawnPointX), random(this.player.spawnPointY), this.player, this.map);
-    this.enemyCount = 500;
+    this.enemyCount = 150;
 
   }
 
@@ -38,10 +38,27 @@ class world{
     this.enemy.show();
     this.player.show();
     for(let i = 0; i < this.enemyCount; i++){
+      for(let j = 0; j < this.enemyCount; j++){
+        if(this.enemies[i] != this.enemies[j]){
+          this.enemies[i].enemyCollision(this.enemies[j]);
+        }
+      }
       this.enemies[i].show();
     }
     this.wallCollision();
+    this.enemyCollision();
     this.map.moveCheck();
+  }
+
+  enemyCollision(){
+    for(let i = 0; i < this.enemyCount; i++){
+      for(let j = 0; j < this.enemyCount; j++){
+        if(this.enemies[i] != this.enemies[j]){
+          this.enemies[i].enemyCollision(this.enemies[j]);
+        }
+      }
+
+    }
   }
 
   wallCollision(){
