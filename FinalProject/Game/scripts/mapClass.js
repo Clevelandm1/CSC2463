@@ -3,7 +3,7 @@ class map{
     this.pos = createVector(0, 0);
     this.vel = createVector(0, 0);
     this.acc = createVector(0, 0);
-    this.speed = 10;
+    this.speed = .54;
     this.playerFacing = createVector(0, 0);
     this.mapSize = 2000;
   }
@@ -65,7 +65,8 @@ class map{
     this.controller();
     this.vel = this.acc;
     this.playerFacing = this.acc;
-    this.vel.setMag(this.speed)
+    let deltaX = deltaTime * this.speed;
+    this.vel.setMag(deltaX);
     this.pos.add(this.vel);
   }
 /////////////////////////////////////////

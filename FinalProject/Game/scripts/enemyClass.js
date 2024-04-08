@@ -3,24 +3,25 @@ class enemy{
     this.pos = createVector(x, y);
     this.vel = createVector(0, 0);
     this.acc = createVector(0, 0);
-    this.speed = 5;
+    this.speed = .27;
     this.player = player;
     this.map = map;
     this.facing = createVector(0, 0);
     this.playerCollisionHelper = 6;
-    this.size = 40;
+    this.hitboxScale = 1.3;
+    this.r = 20*this.hitboxScale;
   }
 
   follow(){
     this.acc = p5.Vector.sub(this.player.pos, this.pos);
     this.acc.normalize();
     this.vel = this.acc;
-    this.vel.setMag(this.speed);
+    let deltaX = this.speed * deltaTime;
+    this.vel.setMag(deltaX);
   }
 
   update(){
     this.follow();
-    
 
     if(this.player.onWall.x == 0){
         this.pos.x+=this.map.vel.x;
@@ -29,28 +30,27 @@ class enemy{
     if(this.player.onWall.y == 0){
         this.pos.y+=this.map.vel.y;
     }
-
-
     this.collision();
+    this.pos.add(this.vel);
   }
   enemyCollision(enemy){
-    if(this.pos.x + this.size/2 > enemy.pos.x - this.size/2 && this.pos.x - this.size/2 < enemy.pos.x + this.size/2 && this.pos.y + this.size/2 > enemy.pos.y - this.size/2 && this.pos.y - this.size/2 < enemy.pos.y + this.size/2){
-      let distance = p5.Vector.sub(enemy.pos, this.pos);
-      distance.setMag(3);
-      this.pos.sub(distance);
-      
+    let dist = p5.Vector.dist(enemy.pos, this.pos);
+    if(dist <= this.r + enemy.r){
+      let direction = p5.Vector.sub(enemy.pos, this.pos);
+      direction.setMag(dist - this.r - enemy.r);
+      this.pos.add(direction);
     }
-
   }
   collision(){
-    if(this.pos.x + this.player.size/2 - this.playerCollisionHelper > this.player.pos.x - this.player.size/2 + this.playerCollisionHelper && this.pos.x - this.player.size/2 + this.playerCollisionHelper < this.player.pos.x + this.player.size/2 - this.playerCollisionHelper && this.pos.y + this.player.size/2 - this.playerCollisionHelper > this.player.pos.y - this.player.size/2 + this.playerCollisionHelper && this.pos.y - this.player.size/2 + this.playerCollisionHelper < this.player.pos.y + this.player.size/2 - this.playerCollisionHelper){
-        this.vel.mult(-1);
+    let dist = p5.Vector.dist(this.player.pos, this.pos);
+    if(dist <= this.r + this.player.r){
+      let direction = p5.Vector.sub(this.player.pos, this.pos);
+      direction.setMag(dist - this.r - this.player.r);
+      this.pos.add(direction);
     }
-    this.pos.add(this.vel);
   }
 
   face(){
-    //let p = createVector(this.player.pos.x, this.player.pos.y);
     this.facing = p5.Vector.sub(this.player.pos, this.pos);
     this.facing.normalize();
   }
@@ -63,10 +63,17 @@ class enemy{
 
   show(){
     this.face();
-    fill(170, 0, 0);
+    
     push()
     this.rotation()
-    square(0, 0, this.size);
+    fill(0, 100, 0);
+    rect(this.r*2/3/this.hitboxScale, this.r*1.2/this.hitboxScale, 2*this.r/this.hitboxScale, .6*this.r/this.hitboxScale);
+    rect(this.r*2/3/this.hitboxScale, -this.r*1.2/this.hitboxScale, 2*this.r/this.hitboxScale, .6*this.r/this.hitboxScale);
+    fill(38, 20, 9);
+    square(0, 0, this.r*2/this.hitboxScale);
+    fill(170, 0, 0, 80);
+    //circle(0, 0, this.r*2);
+    line(0, 0, 30, 0);
     pop();
     this.update();
 

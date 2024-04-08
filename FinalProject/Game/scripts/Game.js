@@ -3,7 +3,7 @@ let gameWidth = 800;
 let gameHeight = 800;
 
 function setup(){
-  canvas = createCanvas(gameWidth, gameHeight);
+  let canvas = createCanvas(gameWidth, gameHeight);
   canvas.position(100, 100);
   p = new world(0, 0);
   p.fillEnemies();
@@ -13,6 +13,7 @@ function draw() {
   background(220);
   strokeWeight(3);
   p.run();
+
 }
 
 
@@ -22,8 +23,7 @@ class world{
     this.map = new map(width/2, height/2);
     this.player = new player(gameWidth/2, gameHeight/2, this.map);
     this.enemies = []
-    this.enemy = new enemy(random(this.player.spawnPointX), random(this.player.spawnPointY), this.player, this.map);
-    this.enemyCount = 150;
+    this.enemyCount = 50;
 
   }
 
@@ -35,7 +35,6 @@ class world{
 
   run(){
     this.map.show();
-    this.enemy.show();
     this.player.show();
     for(let i = 0; i < this.enemyCount; i++){
       for(let j = 0; j < this.enemyCount; j++){
@@ -46,7 +45,7 @@ class world{
       this.enemies[i].show();
     }
     this.wallCollision();
-    this.enemyCollision();
+    //this.enemyCollision();
     this.map.moveCheck();
   }
 
@@ -57,7 +56,6 @@ class world{
           this.enemies[i].enemyCollision(this.enemies[j]);
         }
       }
-
     }
   }
 

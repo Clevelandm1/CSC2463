@@ -6,7 +6,7 @@ class player{
     this.spawnPointY = [random(this.pos.y - 600), random(this.pos.y - 600), random(this.pos.y - 600), random(this.pos.y + 600), random(this.pos.y + 600), random(this.pos.y + 600)];
     this.facing = createVector(0, 0);
     this.onWall = createVector(0, 0);
-    this.size = 50;
+    this.r = 35;
   }
 
   mouseKB(){
@@ -16,15 +16,13 @@ class player{
   }
 
   show(){
-    this.mouseKB();
     push();
-
-
-    rectMode(CENTER);
     fill(0, 0, 170);
     translate(this.pos.x, this.pos.y);
+    this.mouseKB();
     rotate(this.facing.heading());
-    square(0, 0, this.size);
+    circle(0, 0, this.r*2);
+    line(0, 0, 40, 0);
     pop();
   }
 }
