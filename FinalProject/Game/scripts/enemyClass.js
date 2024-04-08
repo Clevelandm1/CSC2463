@@ -8,7 +8,7 @@ class enemy{
     this.map = map;
     this.facing = createVector(0, 0);
     this.playerCollisionHelper = 6;
-    this.hitboxScale = 1.3;
+    this.hitboxScale = 1.4;
     this.r = 20*this.hitboxScale;
   }
 
@@ -72,7 +72,7 @@ class enemy{
     fill(38, 20, 9);
     square(0, 0, this.r*2/this.hitboxScale);
     fill(170, 0, 0, 80);
-    //circle(0, 0, this.r*2);
+    circle(0, 0, this.r*2);
     line(0, 0, 30, 0);
     pop();
     this.update();

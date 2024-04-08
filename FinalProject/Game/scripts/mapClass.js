@@ -5,7 +5,7 @@ class map{
     this.acc = createVector(0, 0);
     this.speed = .54;
     this.playerFacing = createVector(0, 0);
-    this.mapSize = 2000;
+    this.mapSize = 3000;
   }
 
   isMoving(){
