@@ -10,6 +10,9 @@ class enemy{
     this.playerCollisionHelper = 6;
     this.hitboxScale = 1.4;
     this.r = 20*this.hitboxScale;
+    this.collisionChecked = false
+    this.armColor = random(70, 140);
+    this.headColor = createVector(random(20, 55), random(10, 35));
   }
 
   follow(){
@@ -30,7 +33,7 @@ class enemy{
     if(this.player.onWall.y == 0){
         this.pos.y+=this.map.vel.y;
     }
-    this.collision();
+    //this.collision();
     this.pos.add(this.vel);
   }
   enemyCollision(enemy){
@@ -41,14 +44,14 @@ class enemy{
       this.pos.add(direction);
     }
   }
-  collision(){
-    let dist = p5.Vector.dist(this.player.pos, this.pos);
-    if(dist <= this.r + this.player.r){
-      let direction = p5.Vector.sub(this.player.pos, this.pos);
-      direction.setMag(dist - this.r - this.player.r);
-      this.pos.add(direction);
-    }
-  }
+  // collision(){
+  //   let dist = p5.Vector.dist(this.player.pos, this.pos);
+  //   if(dist <= this.r + this.player.r){
+  //     let direction = p5.Vector.sub(this.player.pos, this.pos);
+  //     direction.setMag(dist - this.r - this.player.r);
+  //     this.pos.add(direction);
+  //   }
+  // }
 
   face(){
     this.facing = p5.Vector.sub(this.player.pos, this.pos);
@@ -66,13 +69,13 @@ class enemy{
     
     push()
     this.rotation()
-    fill(0, 100, 0);
+    fill(0, this.armColor, 0);
     rect(this.r*2/3/this.hitboxScale, this.r*1.2/this.hitboxScale, 2*this.r/this.hitboxScale, .6*this.r/this.hitboxScale);
     rect(this.r*2/3/this.hitboxScale, -this.r*1.2/this.hitboxScale, 2*this.r/this.hitboxScale, .6*this.r/this.hitboxScale);
-    fill(38, 20, 9);
+    fill(this.headColor.x, this.headColor.y, 9);
     square(0, 0, this.r*2/this.hitboxScale);
     fill(170, 0, 0, 80);
-    circle(0, 0, this.r*2);
+    //circle(0, 0, this.r*2);
     line(0, 0, 30, 0);
     pop();
     this.update();

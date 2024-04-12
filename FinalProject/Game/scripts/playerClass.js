@@ -6,7 +6,8 @@ class player{
     this.spawnPointY = [random(this.pos.y - 600), random(this.pos.y - 600), random(this.pos.y - 600), random(this.pos.y + 600), random(this.pos.y + 600), random(this.pos.y + 600)];
     this.facing = createVector(0, 0);
     this.onWall = createVector(0, 0);
-    this.r = 35;
+    this.r = 33;
+    this.gun = new Gun(this.r+10, 0, this.r*.7);
   }
 
   mouseKB(){
@@ -17,12 +18,30 @@ class player{
 
   show(){
     push();
-    fill(0, 0, 170);
+    rectMode(CENTER);
     translate(this.pos.x, this.pos.y);
     this.mouseKB();
     rotate(this.facing.heading());
-    circle(0, 0, this.r*2);
+    push();
+    fill(84, 51, 22);
+    translate(this.r*.7, this.r*.5);
+    rotate(-.42);
+    rect(-7, -3, this.r*10/7, this.r*3/7);
+    pop();
+    push();
+    fill(84, 51, 22);
+    translate(this.r*.7, -this.r*.5);
+    rotate(.42);
+    rect(-7, 3, this.r*10/7, this.r*3/7);
+    pop();
+    this.gun.show();
+    fill(80, 50, 100);
+    rect(-7, 0, this.r*.8, this.r*2);
+    fill("black")
+    square(-7, 0, this.r*1.2);
     line(0, 0, 40, 0);
+    fill(0, 0, 255, 70);
+    //circle(0, 0, this.r*2);
     pop();
   }
 }
