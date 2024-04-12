@@ -77,7 +77,17 @@ class world{
         this.enemySpawnRate = 4;
       }
     }
+
+    function mouseClicked(){
+      if(this.player.gun.ammo > 0){
+        console.log("POW!");
+        this.player.gun.ammo--;
+      }
+    }
+
   }
+
+
 
   //TODO: fix wall collision for circle-square collisions
   wallCollision(){
@@ -105,3 +115,10 @@ class world{
     }
   }
 }
+
+function mouseClicked(){
+      if(p.player.gun.ammo > 0){
+        console.log("POW!");
+        p.player.gun.ammo--;
+      }
+    }

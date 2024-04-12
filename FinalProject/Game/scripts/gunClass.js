@@ -3,6 +3,7 @@ class Gun{
         this.x = x;
         this.y = y;
         this.size = size;
+        this.ammo = 5;
     }
 
     show(){
