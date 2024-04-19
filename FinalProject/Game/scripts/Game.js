@@ -9,6 +9,8 @@ function setup(){
   //p.fillEnemies();
 }
 
+
+
 function draw() {
   background(220);
   strokeWeight(3);
@@ -24,7 +26,7 @@ class world{
     this.player = new player(gameWidth/2, gameHeight/2, this.map);
     this.enemies = []
     this.enemyCount = 0;
-    this.enemySpawnRate = 100;
+    this.enemySpawnRate = 20;
 
   }
 
@@ -71,17 +73,10 @@ class world{
       this.enemies.push(new enemy(random(this.player.spawnPointX), random(this.player.spawnPointY), this.player, this.map));
     }
 
-    if(this.enemySpawnRate != 0 && frameCount%60 == 0){
+    if(this.enemySpawnRate > 0 && frameCount%60 == 0){
       this.enemySpawnRate-=3;
       if(this.enemySpawnRate < 4){
         this.enemySpawnRate = 4;
-      }
-    }
-
-    function mouseClicked(){
-      if(this.player.gun.ammo > 0){
-        console.log("POW!");
-        this.player.gun.ammo--;
       }
     }
 
@@ -116,9 +111,10 @@ class world{
   }
 }
 
-function mouseClicked(){
-      if(p.player.gun.ammo > 0){
-        console.log("POW!");
-        p.player.gun.ammo--;
-      }
-    }
+function mousePressed(){
+  if(p.player.gun.ammo > 0){
+    console.log(p.player.gun.facing.heading());
+    p.player.gun.fire = true;
+    p.player.gun.ammo--;
+  }
+}
