@@ -43,5 +43,8 @@ class player{
     fill(0, 0, 255, 70);
     //circle(0, 0, this.r*2);
     pop();
+
+  
+
   }
 }

@@ -6,6 +6,7 @@ class Gun{
         this.facing = createVector(0, 0);
         this.ammo = 50;
         this.fire = false;
+        this.bullets = [];
     }
 
     show(){
@@ -16,7 +17,12 @@ class Gun{
         if(this.fire == true){
             this.fired();
         }
+
+
         pop();
+
+        
+
         this.fire = false;
     }
 
@@ -29,10 +35,11 @@ class Gun{
     fired(){
         push();
         fill(200, 200, 0);
+        this.bullets.push(new bullet(p.player.facing));
         translate(0+this.x, 0+this.y);
         this.mouseK();
-        rotate(this.facing.heading());
-        circle(0, 0, 20);
+        //rotate(this.facing.heading());
+        circle(20, 0, 20);
         pop();
     }
 }

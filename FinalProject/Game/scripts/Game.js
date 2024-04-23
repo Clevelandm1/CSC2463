@@ -1,4 +1,5 @@
 let p;
+let b;
 let gameWidth = 1000;
 let gameHeight = 1000;
 
@@ -24,9 +25,9 @@ class world{
   constructor(){
     this.map = new map(width/2, height/2);
     this.player = new player(gameWidth/2, gameHeight/2, this.map);
-    this.enemies = []
+    this.enemies = [];
     this.enemyCount = 0;
-    this.enemySpawnRate = 20;
+    this.enemySpawnRate = 0;
 
   }
 
@@ -80,6 +81,16 @@ class world{
       }
     }
 
+    if(this.player.gun.bullets.length > 0){
+      for(let i = this.player.gun.bullets.length-1; i >= 0; i--){
+        this.player.gun.bullets[i].show();
+        //this.bullets[i].update();
+        // if(this.bullets[i].pos.x > width || this.bullets[i].pos.x < 0 || this.bullets[i].pos.y > height || this.bullets[i].pos.y < 0){
+        //     this.bullets.splice(i, 1);
+        //     i--;
+        // }
+        }
+      }
   }
 
 
@@ -113,7 +124,6 @@ class world{
 
 function mousePressed(){
   if(p.player.gun.ammo > 0){
-    console.log(p.player.gun.facing.heading());
     p.player.gun.fire = true;
     p.player.gun.ammo--;
   }
