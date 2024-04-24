@@ -6,6 +6,7 @@ class map{
     this.speed = .54;
     this.playerFacing = createVector(0, 0);
     this.mapSize = 3000;
+    this.velForBullets = createVector(0, 0);
   }
 
   isMoving(){
@@ -67,6 +68,7 @@ class map{
     this.playerFacing = this.acc;
     let deltaX = deltaTime * this.speed;
     this.vel.setMag(deltaX);
+    this.velForBullets = this.vel;
     this.pos.add(this.vel);
   }
 /////////////////////////////////////////

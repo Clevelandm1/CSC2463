@@ -34,7 +34,7 @@ class enemy{
         this.pos.y+=this.map.vel.y;
     }
     //this.collision();
-    this.pos.add(this.vel);
+    this.pos.sub(this.vel);
   }
   enemyCollision(enemy){
     let dist = p5.Vector.dist(enemy.pos, this.pos);

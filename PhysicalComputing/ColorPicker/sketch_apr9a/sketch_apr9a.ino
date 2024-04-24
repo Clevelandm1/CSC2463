@@ -11,7 +11,7 @@ float xAverage, yAverage = 0;            // the average
 float xStart, yStart;
 bool start = false;
 unsigned long lastTime = 0;
-const int interval = 33;
+const int interval = 35;
 
 
 const int red = 11;

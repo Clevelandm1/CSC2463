@@ -76,7 +76,6 @@ function draw(){
 
    let str = port.readUntil("\n");
    let values = str.split(",");
-   console.log(values);
    if(cleared == false){
       if(values.length > 2){
          joyX = Number(values[0]);
@@ -117,8 +116,18 @@ function draw(){
       port.clear();
       cleared = true;
    }
-
+   push();
+   stroke(0);
+   strokeWeight(2)
+   fill(255, 255, 200, 80);
    circle(circleX, circleY, 50);
+   pop();
+   push();
+   strokeWeight(0);
+   fill(150, 0, 0, 90);
+   rect(circleX, circleY, 2, 50);
+   rect(circleX, circleY, 50, 2);
+   pop();
 }
 
 class bug{
@@ -204,6 +213,8 @@ class bug{
             score++;
             splat.start();
             level+=.5;
+            let message = `${int(255)} ${int(0)} ${int(0)}\n`;
+            port.write(message);
          }
          this.alive = false;
       }
@@ -221,8 +232,6 @@ function joystickClicked(){
    if(joyClicked == true){
       return;
    }
-
-
 
    if(mode == -2){
       mode++;
@@ -249,7 +258,7 @@ function joystickClicked(){
       if((circleX > width/2 - (700+sin(textS)*120)/2) && (circleX < width/2 + (700+sin(textS)*120)/2) && (circleY > height/2 - (100+sin(textS)*10)/2) && (circleY < height/2 + (100+sin(textS)*10)/2)){
          score = 0;
          countDown = 30;
-         level = 10;
+         level = 2;
          mode = 0;
          endSong.stop();
          melodyLoop.start();
@@ -272,6 +281,8 @@ function play(){
       bugs[i].show();
       if(bugs[i].frame > 9){
          bugs.splice(i, 1, new bug(random(100, width-100), random(100, height-100)));
+         let message = `${int(0)} ${int(0)} ${int(0)}\n`;
+         port.write(message);
       }
    }
 

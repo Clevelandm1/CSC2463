@@ -68,6 +68,18 @@ class world{
     //   }
     //   this.enemies[i].show();
     // }
+
+    if(this.player.gun.bullets.length > 0){
+      for(let i = this.player.gun.bullets.length-1; i >= 0; i--){
+        this.player.gun.bullets[i].show();
+        //this.bullets[i].update();
+        // if(this.bullets[i].pos.x > width || this.bullets[i].pos.x < 0 || this.bullets[i].pos.y > height || this.bullets[i].pos.y < 0){
+        //     this.bullets.splice(i, 1);
+        //     i--;
+        // }
+        }
+      }
+
     this.wallCollision();
     this.map.moveCheck();
     if(frameCount%this.enemySpawnRate == 0){
@@ -80,17 +92,6 @@ class world{
         this.enemySpawnRate = 4;
       }
     }
-
-    if(this.player.gun.bullets.length > 0){
-      for(let i = this.player.gun.bullets.length-1; i >= 0; i--){
-        this.player.gun.bullets[i].show();
-        //this.bullets[i].update();
-        // if(this.bullets[i].pos.x > width || this.bullets[i].pos.x < 0 || this.bullets[i].pos.y > height || this.bullets[i].pos.y < 0){
-        //     this.bullets.splice(i, 1);
-        //     i--;
-        // }
-        }
-      }
   }
 
 
