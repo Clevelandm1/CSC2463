@@ -23,6 +23,10 @@ let bite;
 bite = new Tone.Player("libraries/bite.mp3");
 bite.toDestination();
 
+let biteL;
+biteL = new Tone.Player("libraries/cracker.mp3");
+biteL.toDestination();
+
 let game;
 game = new Tone.Player("libraries/game.mp3");
 game.toDestination();
@@ -106,7 +110,7 @@ function setup() {
   rule = new Sprite(width/2, 70, 300, 34, 'n');
   rule.text = "0";
   rule.update = () => {
-    rule.text = "Get 15 Score!";
+    rule.text = "Get 20 Score!";
   }
   rule.color = 'yellow';
   rule.layer = 5;
@@ -288,7 +292,7 @@ function playGame(){
       ball2[i].scale = 1.5
       ball2[i].vel.add(p5.Vector.div(map.vel, 3));
       if(ball2[i].colliding(box)){
-        bite.start();
+        biteL.start();
         r = 205;
         g = 235;
         ball2[i].remove();
@@ -307,7 +311,7 @@ function playGame(){
       countDown++;
    }
   
-   if(points >= 15){
+   if(points >= 20){
     game.stop();
     allSprites.visible = false;
     allSprites.autoUpdate = false;
