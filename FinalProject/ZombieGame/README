@@ -1,1 +1,12 @@
-read
+In zombie game, you are a zombie who must eat humans as fast as possible.
+You chase humans down on a movable map with a camera that follows the zombie.
+The zombie must touch the humans to eat them and increase its score. There are
+two types of humans: small ones that are slower but worth one point, and
+                      large ones that are faster but worth two points.
+Whenever you eat a small human, the light flashes red and slowly fades out.
+Whenever you eat a large human, the light flashes green, then fades into yellow, 
+then fades into red, and then fades out. The small and large humans also have 
+different eating sounds.
+
+
+This game is controlled by one joystick, and it outputs to one RGB LED.
