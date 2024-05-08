@@ -16,9 +16,6 @@ function setup() {
   slider.style('transform', 'rotate(270deg)')
 }
 
-
-
-
 function draw() {
   let brushs = slider.value();
   smooth();
@@ -29,9 +26,6 @@ function draw() {
     stroke(brush);
     line(mouseX, mouseY, pmouseX, pmouseY);
   }
-  textSize(200);
-  textAlign(CENTER, CENTER)
-  text('hi', width/2, height/2);
 
 strokeWeight(0);
 
