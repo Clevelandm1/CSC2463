@@ -321,7 +321,7 @@ function playGame(){
     let message = `${int(r)} ${int(g)} ${int(b)}\n`;
     port.write(message);
     r*=.9;
-    g*=.8;
+    g*=.85;
     
 }
 
